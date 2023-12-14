@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: TASK MANAGER API
+  version: 1.0.0
+tags:
+  - name: Tasks
+    description: Operations related to tasks
+paths:
+  /api/v1/tasks:
+    get:
+      summary: GET ALL TASKS
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Successful response
+    post:
+      summary: CREATE TASK
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+  /api/v1/tasks/{taskId}:
+    parameters:
+      - name: taskId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: GET SINGLE TASK
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+    patch:
+      summary: UPDATE TASK
+      tags:
+        - Tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: Successful update
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '204':
+          description: No Content
+    delete:
+      summary: DELETE TASK
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+servers:
+  - url: https://task-manager-l4s0.onrender.com
+    description: Production server
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        name:
+          type: string
